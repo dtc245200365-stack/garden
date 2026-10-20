@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dành bạn, cả một vườn thương</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{--s1:#9fd0ee;--s2:#cfe7f3;--s3:#f4eee4;--ink:#7a4c6e;--sub:#6b6a80;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#2d3a6b;--s2:#7a6a9a;--s3:#e8b4b8;--ink:#f3d9ea;--sub:#e2d6ec;color-scheme:dark}}
+:root[data-theme="dark"]{--s1:#2d3a6b;--s2:#7a6a9a;--s3:#e8b4b8;--ink:#f3d9ea;--sub:#e2d6ec;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Noto Serif',Georgia,'Times New Roman',serif;background:linear-gradient(var(--s1),var(--s2) 50%,var(--s3));color:var(--ink)}
+button{font:inherit}
+.scene{position:fixed;inset:0;overflow:hidden;transition:filter 1.2s}
+body.letter .scene{filter:blur(6px) saturate(.85)}
+.cl{position:absolute;left:0;width:34vw;height:12vh;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));filter:blur(6px);animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-45vw)}to{transform:translateX(125vw)}}
+.cap{position:absolute;top:calc(env(safe-area-inset-top,0px) + 20px);left:26px;font-style:italic;font-size:14px;color:var(--sub);opacity:.85}
+.intro{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12vh);left:0;right:0;text-align:center;padding:0 16px;animation:in 2s .6s both;transition:opacity 1.2s,transform 1.5s}
+.intro h1{font-weight:400;font-style:italic;font-size:clamp(26px,5.2vw,42px);color:var(--ink)}
+.intro p{margin-top:10px;font-size:clamp(11px,1.6vw,14px);color:var(--sub)}
+body.open .intro{opacity:0!important;transform:translateY(-20px)}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#g{position:absolute;inset:0}
+.f{position:absolute;opacity:0;transform:translateY(60px);width:var(--s);height:var(--h);margin-left:calc(var(--s)/-2);transform-origin:50% 100%}
+body.open .f{opacity:1;transform:none;transition:opacity 1.4s var(--d),transform 2s cubic-bezier(.2,.8,.2,1) var(--d)}
+.f.hero{opacity:1;transform:none}
+body.open .f.hero{transform:scale(1.28);transition:transform 3.5s cubic-bezier(.3,.7,.2,1)}
+.in{position:absolute;inset:0;transform-origin:50% 100%;animation:sway var(--t) ease-in-out infinite alternate;animation-delay:calc(var(--d)*-1)}
+@keyframes sway{from{transform:rotate(-2.2deg)}to{transform:rotate(2.2deg)}}
+.st{position:absolute;left:50%;bottom:0;width:max(2px,calc(var(--s)*.035));height:100%;margin-left:-1px;border-radius:2px;background:linear-gradient(#4f8a56,#2f6a3f);transform-origin:bottom;transform:scaleY(.2);transition:transform 2.2s cubic-bezier(.2,.8,.2,1) var(--d)}
+body.open .st{transform:scaleY(1)}
+.hd{position:absolute;left:0;bottom:calc(100% - var(--s)/2);width:var(--s);height:var(--s);transform:scale(.1) rotate(-50deg);transition:transform 2s cubic-bezier(.2,.9,.3,1.2) calc(var(--d) + .5s)}
+body.open .hd{transform:none}
+.hd svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 3px rgba(80,40,60,.18))}
+.lf{position:absolute;left:50%;width:calc(var(--s)*.4);fill:#5f9d66}
+.f.hero .st{animation:grow 2s cubic-bezier(.2,.8,.2,1) both}
+.f.hero .hd{animation:bloom 1.8s 1.2s cubic-bezier(.2,.9,.3,1.2) both;transition:none;cursor:pointer;outline:none}
+.f.hero .hd::after{content:"";position:absolute;inset:-8%;border-radius:50%;border:2px solid rgba(255,255,255,.85);opacity:0;animation:ping 2.4s 3.2s infinite ease-out}
+body.open .hero .hd::after{display:none}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes bloom{from{transform:scale(.1) rotate(-50deg)}to{transform:none}}
+@keyframes ping{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+.p{position:fixed;top:-5vh;width:10px;height:14px;border-radius:70% 0 70% 0;opacity:0;pointer-events:none;z-index:20;animation:fall linear forwards}
+@keyframes fall{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:.85}100%{opacity:.7;transform:translate(var(--dx),108vh) rotate(var(--r))}}
+.card{position:fixed;left:50%;top:50%;z-index:30;width:min(92vw,430px);max-height:84vh;overflow:auto;padding:30px 30px 26px;background:#f7f5ee;color:#4a4350;border-radius:4px;box-shadow:0 30px 80px rgba(40,30,60,.35);text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,-44%) rotate(-3deg) scale(.96);transition:opacity .9s,transform 1.1s cubic-bezier(.2,.8,.2,1)}
+body.letter .card{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.card .ic{width:30px;height:30px}
+.card .to{font-style:italic;font-size:14px;margin:12px 0 18px;color:#5a5262}
+.card h2{font-weight:600;font-size:clamp(22px,5.4vw,27px);line-height:1.35;color:#5e3a63;margin-bottom:18px}
+.card p{font-size:13.5px;line-height:1.75;margin-bottom:12px}
+.lk{margin-top:8px;background:none;border:0;color:#5e3a63;font-style:italic;font-size:13.5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.btns{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 4vh);z-index:25;display:flex;gap:12px;justify-content:center;opacity:0;pointer-events:none;transition:opacity 1s}
+body.done:not(.letter) .btns{opacity:1;pointer-events:auto}
+.btns button{padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.78);backdrop-filter:blur(6px);color:#6a3f66;font-size:13px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div id="sky"></div>
+  <div class="cap">Dành bạn, cả một vườn thương.</div>
+  <div class="intro"><h1>Từ một bông hoa nhỏ…</h1><p>Chạm vào hoa, một điều dịu dàng đang chờ bạn.</p></div>
+  <div id="g"></div>
+</div>
+
+<div class="card" role="dialog" aria-label="Lá thư">
+  <svg class="ic" viewBox="-50 -50 100 100"><path d="M0 -2a2.5 2.5 0 1 1-2.5 2.5" fill="none"/><circle cy="-14" r="16" fill="#ef9aa8"/><circle cy="-14" r="8" fill="#e57b8f"/><path d="M0 2V46M0 24C10 16 22 16 26 22C18 30 6 30 0 24Z" stroke="#4f8a56" stroke-width="3" fill="#6aa96f"/></svg>
+  <div class="to">Gửi bạn thương mến,</div>
+  <h2>Mong những<br>điều đẹp đẽ<br>luôn nở bên bạn.</h2>
+  <p>Một bông hoa có thể làm một ngày thêm đẹp.<br>Còn bạn, làm thế giới này dịu dàng hơn.</p>
+  <p>Nhân ngày 20/10, chúc bạn luôn được yêu thương, trân trọng và có thật nhiều niềm vui. Mong bạn đủ bình yên để tận hưởng những điều nhỏ bé, đủ tự tin để theo đuổi những điều mình yêu.</p>
+  <p>Hôm nay và cả những ngày sau, hãy cứ rạng rỡ theo cách của riêng mình nhé.</p>
+  <button class="lk" id="close">Gửi bạn thật nhiều thương mến »</button>
+</div>
+
+<div class="btns"><button id="re">Đọc lại thư</button><button id="mo">Rắc thêm cánh hoa</button></div>
+
+<script>
+const $=s=>document.querySelector(s),R=(a,b)=>a+Math.random()*(b-a),W=innerWidth,H=innerHeight;
+const P=[[350,72,82],[16,88,84],[110,42,80],[205,62,82],[38,92,82],[348,70,68],[330,60,86]];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+function rose(h,s,l,L=5){
+  let o='';
+  for(let i=0;i<L;i++){
+    const r=46-i*8.5,n=i<3?7:5,t=i/(L-1);
+    const f=`hsl(${h} ${s}% ${l-t*20}%)`,k=`hsl(${h} ${s}% ${l-t*20-16}%)`;
+    for(let j=0;j<n;j++)
+      o+=`<ellipse cy="${-r*.52}" rx="${r*.5}" ry="${r*.5}" transform="rotate(${j*360/n+i*29})" fill="${f}" stroke="${k}" stroke-opacity=".45" stroke-width=".7"/>`;
+  }
+  return `<svg viewBox="-50 -50 100 100">${o}<path d="M0 -2a2.5 2.5 0 1 1-2.5 2.5a5 5 0 1 1 6.5-3.5" fill="none" stroke="hsl(${h} ${s}% ${l-34}%)" stroke-width=".9"/></svg>`;
+}
+const leaf=(b,flip)=>`<svg class="lf" viewBox="0 0 40 20" style="bottom:${b}%;transform-origin:0 100%;transform:${flip?'scaleX(-1) ':''}rotate(-22deg)"><path d="M0 10C10 -2 30 0 40 12C28 22 10 20 0 10Z"/></svg>`;
+
+function flower(o){
+  const d=document.createElement('div'),[h,s,l]=o.c;
+  d.className='f'+(o.hero?' hero':'');
+  d.style.cssText=`left:${o.x}%;bottom:${o.b}px;--s:${o.s}px;--h:${o.h}px;--d:${o.d}s;--t:${R(3,6)}s;z-index:${o.z};${o.bl?`filter:blur(${o.bl}px)`:''}`;
+  const lv=o.s>60?leaf(28,0)+leaf(50,1):'';
+  d.innerHTML=`<div class="in"><div class="st"></div>${lv}<div class="hd"${o.hero?' role="button" tabindex="0" aria-label="Chạm vào bông hoa"':''}>${rose(h,s,l)}</div></div>`;
+  $('#g').append(d);
+  return d;
+}
+
+// Mây trôi
+for(let i=0;i<5;i++){
+  const c=document.createElement('div');
+  c.className='cl';
+  c.style.cssText=`top:${R(6,40)}%;transform:scale(${R(.8,1.5)});animation-duration:${R(110,190)}s;animation-delay:-${R(0,150)}s`;
+  $('#sky').append(c);
+}
+
+// Vườn hoa: 4 hàng, hàng sau nhỏ + mờ, hàng trước to + nét
+const rows=[
+  {n:12,s:[34,54],h:[.16,.30],b:.10,z:1,bl:2.4},
+  {n:12,s:[52,78],h:[.14,.30],b:.04,z:2,bl:1.1},
+  {n:9, s:[74,104],h:[.10,.26],b:-.02,z:3,bl:0},
+  {n:7, s:[96,140],h:[.06,.20],b:-.08,z:6,bl:0}
+];
+rows.forEach(r=>{
+  for(let i=0;i<r.n;i++)
+    flower({x:(i+R(.1,.9))/r.n*100,b:r.b*H,s:R(r.s[0],r.s[1]),h:R(r.h[0],r.h[1])*H,c:pick(P),d:R(.1,2.4),z:r.z,bl:r.bl});
+});
+// Bông hoa chính
+flower({hero:1,x:50,b:-.01*H,s:Math.min(190,Math.max(120,W*.26)),h:.46*H,c:[350,72,80],d:0,z:5});
+
+// Cánh hoa rơi
+function petal(loop,fast){
+  const p=document.createElement('div'),[h,s,l]=pick(P);
+  p.className='p';
+  p.style.cssText=`left:${R(0,100)}vw;background:hsl(${h} ${s}% ${l}%);animation-duration:${fast?R(4,8):R(7,14)}s;--dx:${R(-10,10)}vw;--r:${R(0,720)}deg`;
+  p.onanimationend=()=>{p.remove();loop&&petal(1)};
+  document.body.append(p);
+}
+
+// Luồng: chạm hoa → vườn nở → lá thư
+let opened=0;
+function open(){
+  if(opened)return;opened=1;
+  document.body.classList.add('open');
+  for(let i=0;i<14;i++)setTimeout(()=>petal(1),i*600);
+  setTimeout(()=>document.body.classList.add('letter'),5200);
+}
+const hd=$('.hero .hd');
+hd.onclick=open;
+hd.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};
+$('#close').onclick=()=>{document.body.classList.remove('letter');document.body.classList.add('done')};
+$('#re').onclick=()=>document.body.classList.add('letter');
+$('#mo').onclick=()=>{for(let i=0;i<36;i++)setTimeout(()=>petal(0,1),i*60)};
+</script>
+</body>
+</html>
